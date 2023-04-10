@@ -1,0 +1,77 @@
+
+
+{% extends 'base.html'%}
+
+{% load static %}
+{% block content %}
+<div class="page-header">
+   <div class="row align-items-center">
+      <div class="col">
+         <h7 class="page-title">Edit Budget and Rate</h7>
+   </div>
+</div>
+<br>
+
+<br>
+<div class="row">
+   <div class="col-sm-12">
+      <div class="card">
+         <div class="card-body">
+            <form action="{% url 'budget_update' %}" method="post"  >
+              {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                        
+                                <label for="name" >आर्थिक बर्ष<sup class="text-danger">*required</sup></label>
+                                <input type="text" class="form-control" name="budget_id"  value="{% for i in budget %}{{i.id}} {% endfor %}" hidden>
+                                
+
+                                <select class="form-control" name="fiscal_year" required>
+                                 {% for i in fiscalyear %}
+                                 <option value="{{i.id}}">{{i.name}}</option>
+                                 {% endfor %}
+                               </select>
+                              </div>
+                           
+                        </div>
+                
+                         <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="name">पेट्रोलको दर <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control" name="rate_petrol"  value={% for i in budget %}{{i.rate_petrol}} {% endfor %} >
+
+                            </div>
+                         </div>  
+                         <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="name">डिजेलको दर <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control" name="rate_disel" value="{% for i in budget %}{{i.rate_disel}} {% endfor %}" >
+                            </div>
+                         </div>  
+                         <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="name">जम्मा  विनियोजन बजेट <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control" name="total_budget"  value="{% for i in budget %}{{i.total_budget}} {% endfor %}">
+                            </div>
+                         </div>  
+                        
+                      </div>
+               <div class="col-12">
+                     <button type="submit" class="btn btn-success">Update </button>
+               </div>
+            </form>
+
+
+         </div>
+      </div>
+   </div>
+</div>
+
+
+{% endblock%}
+
+
+
+
+

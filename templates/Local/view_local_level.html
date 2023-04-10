@@ -1,0 +1,108 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Local Level </h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Local level </li>
+             </ul>
+          </div>
+         
+        
+       </div>
+     </div>
+     {% include 'includes/messages.html' %}
+     <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                   <table id="table_id" class="table table-hover table-center mb-0 " class="w-20 p-3">
+                      <thead>
+                         <tr>
+                       
+                         
+                            <th>Local Level</th>
+                            <th>Chairman/Mayer</th>
+                            <th>Vice Chairman/Meyer</th>
+                            <th>CAO</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                       
+                         <tr>
+                            <td>{{person_id}}</td>
+                            <td>{{person_id.chairman}}</td>
+                            <td>{{person_id.vicechairman}}</td>
+                            <td>{{person_id.cao}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{i.cao_telephone}}</td>
+                            <td class="text-right">
+                               <div class="actions">
+                                  <a href="" class="btn btn-sm bg-success-light mr-2">
+                                  <i class="fas fa-pen"></i>
+                                  </a>
+                                  <a href="" class="btn btn-sm bg-danger-light">
+                                  <i class="fas fa-trash"></i>
+                                  </a>
+                               </div>
+                            </td>
+                         </tr>
+                   
+                         
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+{% endblock%}
+
+
+{% block script %}
+
+<script>
+   $("#id_province").change(function(){
+      const url = $("#form_province").attr("data-district-url");  // get the url of the `load_cities` view
+      console.log(url)
+      const provinceid = $(this).val();  
+      $.ajax({                       // initialize an AJAX request
+          url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+          data: {
+              'provinceid': provinceid       // add the country id to the GET parameters
+          },
+          success: function(data) {   // `data` is the return of the `load_cities` view function
+              $("#id_district").html(data); 
+          }
+      });
+  });
+</script>
+
+<script>
+   $("#id_district").change(function(){
+      const url = $("#form_province").attr("data-local-level-url");  // get the url of the `load_cities` view
+      console.log(url)
+      const district_id = $(this).val(); 
+      console.log(district_id)
+      $.ajax({                       // initialize an AJAX request
+          url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+          data: {
+              'district_id': district_id       // add the country id to the GET parameters
+          },
+          success: function(data) {   // `data` is the return of the `load_cities` view function
+              $("#id_local_level").html(data); 
+          }
+      });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,115 @@
+
+
+{% extends 'base.html'%}
+
+{% load static %}
+{% block content %}
+<div class="page-header">
+   <div class="row align-items-center">
+      <div class="col">
+         <h7 class="page-title">Add Budget and Rate</h7>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-sm-12">
+      <div class="card">
+         <div class="card-body">
+            <form action="{% url 'budget_entry' %}" method="post"  >
+              {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                        
+                                <label for="name" >आर्थिक बर्ष<sup class="text-danger">*required</sup></label>
+                                <select class="form-control" name="fiscal_year" required>
+                                  {% for i in fiscal_year %}
+                                  <option value="{{i.id}}">{{i.name}}</option>   
+                                  {% endfor %}
+                                </select>
+                              </div>
+                           
+                        </div>
+                
+                         <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="name">पेट्रोलको दर <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control" name="rate_petrol" id="name" placeholder="पेट्रोलको दर">
+                            </div>
+                         </div>  
+                         <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="name">डिजेलको दर <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control" name="rate_disel" id="name" value="" placeholder="डिजेलको दर">
+                            </div>
+                         </div>  
+                         <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="name">जम्मा  विनियोजन बजेट <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control" name="total_budget" id="name" placeholder="जम्मा बजेट">
+                            </div>
+                         </div>  
+                        
+                      </div>
+               <div class="col-12">
+                     <button type="submit" class="btn btn-success">Save </button>
+               </div>
+            </form>
+
+
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-sm-12">
+      <div class="card card-table">
+         <div class="card-body">
+            <div class="table-responsive">
+               <table  class="table table-hover table-center mb-0">
+                  <thead>
+                     <tr>
+                        <th>क्रस</th>
+                        <th>आर्थिक बर्ष</th>
+                        <th>पेट्रोलको दर</th>
+                        <th>डिजेलको दर</th>
+                        <th>जम्मा बजेट</th>
+                        <th class="text-right">Action</th>
+                   
+                     </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in budget %}
+                     <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.fiscalyear.name}}</td>
+                        <td>{{i.rate_petrol}}</td>
+                        <td>{{i.rate_disel}}</td>
+                        <td>{{i.total_budget}}</td>
+                          
+                        <td class="text-right">
+                           
+                              <a href="{% url 'budget_edit' i.id %}" class="btn btn-sm bg-success-light mr-2">
+                              <i class="fas fa-pen"></i>
+                              </a>
+                           
+                        </td>
+                   
+                     </tr>
+                     {% endfor %}
+                     
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock%}
+
+
+
+
+

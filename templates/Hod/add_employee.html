@@ -1,0 +1,202 @@
+
+
+{% extends 'base.html'%}
+
+{% load static %}
+{% block content %}
+<div class="page-header">
+   <div class="row align-items-center">
+      <div class="col">
+         <h7 class="page-title">Add Employee</h7>
+   </div>
+</div>
+<div class="row">
+   <div class="col-sm-12">
+      <div class="card">
+         <div class="card-body">
+            <form action="{% url 'add_employee' %}" method="post"  enctype ="multipart/form-data" >
+              {% csrf_token %}
+
+                  <div class="row">
+                                        <div class="col-md-4">
+                            <div class="form-group">
+                               <label for="darta_date">नियुक्ति/निर्वाचित मिति </label>
+                               <input type="text" class="form-control nepali-date date-required-check" name="appointed_date" id="darta_date"
+                                  value="" placeholder="नियुक्ती मिति">
+                            </div>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="form-group">
+                               <label for="name">कर्मचारी/जनप्रतिनिधि/अन्यको नाम </label>
+                               <input type="text" class="form-control" name="name" id="name" value="" placeholder="कर्मचारीको नाम">
+                            </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="name">कुपन प्रापकको पद</label>
+                              <select class="form-control" name="typeemployee" required>
+                                           
+                                 {% for i in typeemployee %}
+                                 <option value="{{i.id}}">{{i.type}}</option>
+                                 {% endfor %}
+                               </select>
+                           </div>
+                        </div>
+                      
+                         <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="name" >कार्यरत स्थान</label>
+                
+                            <select class="form-control" name="workplace" required>
+                         
+                              {% for i in workplace %}
+                              <option value="{{i.id}}">{{i.name}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                       </div>
+                         <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="name" >कार्यरत शाखा</label>
+                              <select class="form-control" name="dep_name" required>
+                              
+                        
+                                {% for i in department %}
+                                <option value="{{i.id}}">{{i.dep_name}}</option>
+                                {% endfor %}
+                               
+                     
+                              </select>
+                            </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="designation">कार्यरत पद </label>
+                              <input type="text" class="form-control" name="designation" id="name" value="" placeholder="कार्यरत पद">
+                           </div>
+                        </div>
+                        
+                         <div class="col-md-4">
+                            <div class="form-group">
+                               <label for="mobile"> मोबाइल नम्बर </label>
+                               <input type="text" class="form-control" name="mobile" id="name" value="" placeholder="मोबाइल नम्बर">
+                            </div>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="form-group">
+                               <label for="vehicle"> इमेल  </label>
+                               <input type="email" class="form-control" name="email" id="vehilce"  placeholder="इमेल ">
+                            </div>
+                         </div> 
+                         <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="vehicle"> Username </label>
+                              <input type="text" class="form-control" name="username" id="vehilce"  placeholder="Username" >
+                           </div>
+                        </div> 
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="vehicle"> Password </label>
+                              <input type="password" class="form-control" name="password" id="vehilce" value="" placeholder="Password ">
+                           </div>
+                        </div>
+                  
+             
+               <div class="col-md-4">
+               <div class="form-group">
+                 <label for="email"> सवारी नम्बर </label>
+                 <input type="text" class="form-control" name="vehicle" id="vehcile" value="" placeholder="सवारी नम्बर ">
+              </div>
+           </div>
+                <div class="col-md-4">
+               <div class="form-group">
+                 <label for="email"> सवालरी चालक नम्बर </label>
+                 <input type="text" class="form-control" name="liscen_no" id="vehcile" value="" placeholder="सवारी चालक अनुमति नम्बर ">
+              </div>
+           </div>
+      
+               <div class="col-12">
+                     <button type="submit" class="btn btn-success">Save </button>
+               </div>
+              
+             </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<!-- Large modal -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLongTitle">Leave Apply History</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+             <div class="col-sm-12">
+                 <div class="card card-table">
+                    <div class="card-body">
+                       <div class="table-responsive">
+                          <table id="table_id" class="table table-hover table-center mb-0">
+                             <thead>
+                                <tr>
+                               
+                      
+                                   <th>Country </th>
+                                   <th>From</th>
+                                   <th>To</th>
+                                   <th>Visitor</th>
+                                   <th class="text-right">Status</th>
+                                </tr>
+                             </thead>
+                             <tbody>
+                               {% for i in person_leave_history %}
+                                <tr>
+                                   <td>{{i.country_visit}}</td>
+                                   <td>{{i.from_date|date:'Y-m-d'}}</td>
+                                   <td>{{i.to_date|date:'Y-m-d'}}</td>
+                                   <td>{{i.visitors}}</td>
+                                   <td class="text-right">
+                                      <div class="actions">
+                                         {% if i.status == 0 %}
+                                         <span class="badge badge-primary">Request are pending</span>
+                                         {% elif i.status == 1  %}
+                                         <span class="badge badge-success">Accepted</span>
+                                         {% else  %}
+                                         <span class="badge badge-danger">Rejected</span>
+                                         {% endif %}
+                                      </div>
+                                   </td>
+                                </tr>
+                                {% endfor %}
+                                
+                             </tbody>
+                          </table>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            
+           </div>
+     </div>
+   </div>
+ </div>
+ 
+ 
+
+
+{% endblock%}
+
+
+
+
+

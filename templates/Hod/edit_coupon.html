@@ -1,0 +1,116 @@
+
+
+{% extends 'base.html'%}
+
+{% load static %}
+{% block content %}
+<div class="page-header">
+   <div class="row align-items-center">
+      <div class="col">
+         <h7 class="page-title">कुपन Edit गर्नुहोस</h7>
+   </div>
+</div>
+<div class="row">
+   <div class="col-sm-12">
+      <div class="card">
+         <div class="card-body">
+            <form action="{% url 'update_issue_coupon' %}" method="post" id="form">
+              {% csrf_token %}
+
+                  <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                          <label for="name" >आर्थिक बर्ष<sup class="text-danger">*required</sup></label>
+                          <select class="form-control" name="fiscal_year_id" required>
+                            {% for i in fiscal_year %}
+                            <option value="{{i.id}}">{{i.name}}</option>   
+                            {% endfor %}
+                          </select>
+                        </div>
+                     </div>
+                    <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="darta_date">कुपन मिति <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control nepali-date date-required-check" name="date" 
+                               value={{coupon.date|date:'Y-m-d'}} required>
+                            </div>
+                         </div>
+                         <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="name">कर्मचारीको नाम <sup class="text-danger">*required</sup></label>
+                                <input type="text" class="form-control" name="coupon_id" value={{coupon.id}} hidden >
+                                <input type="text" class="form-control" name="emp_id" value="{{coupon.employee.id}}"  hidden >
+                               
+                                <input type="text" class="form-control" name="emp_name" value="{{coupon.employee.name}}"  readonly >
+                            </div>
+                         </div>    
+                         <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="name">पेट्रोल पम्प <sup class="text-danger">*required</sup></label>
+                                <input type="text" class="form-control" name="petrol_id" value="{{coupon.patrolpump.id}}"  hidden >
+                               
+                                <input type="text" class="form-control" name="petrol_name" value="{{coupon.patrolpump.name}}"  readonly >
+                            </div>
+                         </div>
+                         
+                     
+                         <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="name"> इन्धनको किसिम <sup class="text-danger">*required</sup></label>
+                                <input type="text" class="form-control" name="fuel_type_id" value="{{coupon.fueltype.id}}" hidden >
+                               
+                                <input type="text" class="form-control" name="fuel_type" value="{{coupon.fueltype.name}}" >
+                            </div>
+                         </div>            
+
+                         <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="name"> इन्धनको परिमाण <sup class="text-danger">*required</sup></label>
+                               
+                                <input type="text" class="form-control" name="liter" value="{{coupon.liter}}" >
+                            </div>
+                         </div>
+
+               <div class="col-12">
+                     <button type="submit" class="btn btn-success"> Update</button>
+               </div>
+              
+             
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock%}
+
+{% block script %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+<script>
+    jQuery('#form').validate({
+        rules:{
+            name:"required",
+            date:"required",
+            liter: <=20;x   
+        },messages:{
+            name:"Please enter your name",
+            date:"Please enter your coupon date",
+            liter:"Please enter your liter",
+            
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+

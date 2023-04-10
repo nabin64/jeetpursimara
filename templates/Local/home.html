@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="page-header">
+    <div class="row">
+       <div class="col-sm-12">
+         {% if user.is_authenticated %}
+          <h3 class="page-title">Welcome {{user.username}}</h3>
+          {% endif %}
+       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-4 col-sm-6 col-12 d-flex">
+       <div class="card bg-one w-100">
+          <div class="card-body">
+             <div class="db-widgets d-flex justify-content-between align-items-center">
+                <div class="db-icon">
+                   <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="db-info">
+                   <h3>{{petrol_consume}}</h3>
+                   <h6>Consumed Petrol</h6>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 col-12 d-flex">
+       <div class="card bg-two w-100">
+          <div class="card-body">
+             <div class="db-widgets d-flex justify-content-between align-items-center">
+                <div class="db-icon">
+                   <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="db-info">
+                   <h3>{{disel_consume}}</h3>
+                   <h6>Consumed Disel</h6>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 col-12 d-flex">
+       <div class="card bg-three w-100">
+          <div class="card-body">
+             <div class="db-widgets d-flex justify-content-between align-items-center">
+                <div class="db-icon">
+                   <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="db-info">
+                   <h3>{{coupon_count}}</h3>  
+                   <h6>No of Coupon</h6>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12 col-lg-5">
+       <div class="card card-chart">
+          <div class="card-header">
+             <div class="row align-items-center">
+                <div class="col-6">
+                   <h5 class="card-title">Data</h5>
+                </div>
+             
+             </div>
+          </div>
+          <div class="card-body">
+            <canvas id="myChart" width="400" height="250"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+               var ctx = document.getElementById('myChart').getContext('2d');
+
+               var myChart = new Chart(ctx, {
+                   type: 'bar',
+               
+                   data: {
+                       labels: ["Petrol Consume","Disel Consume"],
+                       datasets: [{
+                           label: 'Fuel Consumption Details',
+                           data: [{{petrol_consume}},{{disel_consume}}],
+                           backgroundColor: [
+                               'rgba(54, 224, 185, 0.8)',
+                               'rgba(227, 41, 211, 0.8)',
+                         
+                           ],
+                           borderColor: [
+                               'rgba(255, 99, 132, 1)',
+                               'rgba(54, 162, 235, 1)',
+                   
+                           ],
+                           borderWidth: 2
+                       }]
+                   },
+                   options: {
+                       scales: {
+                           y: {
+                               beginAtZero: true
+                           }
+                       }
+                   }
+               });
+               </script>
+          </div>
+       </div>
+    </div>
+
+    <div class="col-md-7 col-lg-7">
+      <div class="card card-chart">
+         <div class="card-header">
+            <div class="row align-items-center">
+               <div class="col-6">
+                  <h5 class="card-title">Latest Fuel Coupons</h5>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-12">
+         <div class="card card-table">
+            <div class="card-body">
+               <div class="table-responsive">
+                  <table  class="table table-hover table-center mb-0">
+                     <thead>
+                        <tr>
+                           <th>क्रस</th>
+                           <th>पेट्रोल पम्प</th>
+                           <th>इन्धनको किसिम</th>
+                           <th>लिटर</th>
+                           <th>मिति</th>
+  
+                         
+                     
+                        </tr>
+                     </thead>
+                     <tbody>
+                       {% for i in employee_coupon %}
+                        <tr>
+                           <td>{{forloop.counter}}</td>               
+                        
+                          
+                           <td>{{i.patrolpump.name}}</td>
+                           <td>{{i.fueltype.name}}</td>
+                           <td>{{i.liter}}</td>
+                           <td>{{i.date|date:'Y-m-d'}}</td>
+                       
+                           
+                          
+                        
+                        </tr>
+                        {% endfor %}
+                        
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+    
+  </div>
+
+
+
+{% include 'includes/chart.html' %}
+{% endblock%}

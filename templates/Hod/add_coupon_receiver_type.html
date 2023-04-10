@@ -1,0 +1,75 @@
+
+
+{% extends 'base.html'%}
+
+{% load static %}
+{% block content %}
+<div class="page-header">
+   <div class="row align-items-center">
+      <div class="col">
+         <h7 class="page-title">कुपन प्राप्तकर्ताको प्रकार</h7>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-sm-12">
+      <div class="card">
+         <div class="card-body">
+            <form action="{% url 'add_coupon_receiver_type' %}" method="post"  >
+              {% csrf_token %}
+                  <div class="row">
+                         <div class="col-md-5">
+                            <div class="form-group">
+                               <label for="name"> प्रकार <sup class="text-danger">*required</sup></label>
+                               <input type="text" class="form-control" name="name" id="name" value="" placeholder="कुपन प्राप्तकर्ताको प्रकार">
+                            </div>
+                         </div>  
+                        
+                      </div>
+               <div class="col-12">
+                     <button type="submit" class="btn btn-success">Save </button>
+               </div>
+            </form>
+
+
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-sm-12">
+      <div class="card card-table">
+         <div class="card-body">
+            <div class="table-responsive">
+               <table  class="table table-hover table-center mb-0">
+                  <thead>
+                     <tr>
+                        <th>क्रस</th>
+                        <th>प्रकार</th>
+                   
+                     </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in type %}
+                     <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.type}}</td>
+                   
+                     </tr>
+                     {% endfor %}
+                     
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock%}
+
+
+
+
+

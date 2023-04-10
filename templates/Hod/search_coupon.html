@@ -1,0 +1,123 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="content container-fluid">
+    <h5> Search Coupon </h5>
+       
+          <form action="{% url 'search_coupon'%}" method="post" id="form">
+            {% csrf_token %}
+            <div class="row">    
+                <div class="col-md-3">
+                   <div class="form-group">     
+                        <input type="text" class="form-control nepali-date date-required-check" name="fromdate" placeholder="Starting Date" >  
+                   </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                         <input type="text" class="form-control nepali-date date-required-check" name="todate" placeholder="Ending Date">
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                    <div class="form-group">      
+                      <select class="form-control" name="name" required>       
+                        {% for i in patrolpump %}
+                        <option value="{{i.id}}">{{i.name}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                 </div>
+
+                 <div class="col-md-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Search </button>   
+                    </div>
+                 </div>
+            </div>
+          </form>
+         
+          
+       </div>
+     </div>
+     {% include 'includes/messages.html' %}
+     <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                   <table class="table table-hover table-center mb-0">
+                      <thead>
+                         <tr>
+                            <th>क्रस</th>
+                            <th>नाम</th>
+                     
+                            <th>पेट्रोल पम्प</th>
+                            <th>इन्धनको किसिम</th>
+                            <th>लिटर</th>
+                            <th>मिति</th>
+                            <th>कैफियत</th>
+                      
+                         </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in coupon %}
+                         <tr>
+                            <td>{{forloop.counter}}</td>               
+                           <td>{{i.employee.name}}</td>
+                        
+                            <td>{{i.patrolpump.name}}</td>
+                            <td>{{i.fueltype.name}}</td>
+                            <td>{{i.liter}}</td>
+                            <td>{{i.date|date:'Y-m-d'}}</td>
+                        
+                            <td> <div class="actions">
+                                {% if i.status == 0 %}
+                                <button class="btn btn-success" disabled="disabled">Requeted</button>
+                
+                                {% else %}
+                                <button class="btn btn-danger" disabled="disabled">Printed</button>
+                                {% endif %}
+                               
+                            </div></td>
+                           
+                         
+                         </tr>
+                         {% endfor %}
+                         
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+{% endblock%}
+
+{% block script %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+<script>
+    jQuery('#form').validate({
+        rules:{
+            fromdate:"required",
+            todate:"required",
+            name:"required",
+            
+        },messages:{
+            fromdate:"Please enter from date",
+            todate:"Please enter to date",
+            todate:"Please choose patrolpump",
+           
+            
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
+
+</script>
+
+
+{% endblock %}

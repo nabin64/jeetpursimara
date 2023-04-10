@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>जीतपरसिमरा उपमहानगरपालिका</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/bootstrap.min.css'%} ">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/font-awesome.min.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/animate.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/hamburgers.min.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/animsition.min.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/select2.min.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/daterangepicker.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/util.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css'%}">
+      <meta name="robots" content="noindex, follow">
+      <script nonce="b77de532-6e2f-4d11-8658-5cb19f60e263">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>
+   </head>
+   <body>
+      <div class="limiter">
+         <div class="container-login100">
+            <div class="wrap-login100">
+               <form class="login100-form validate-form p-l-55 p-r-55 p-t-178"  method="POST" action="{% url 'doLogin'%}">
+                {% csrf_token %}
+                  <span class="login100-form-title">
+                    <div class="row-fluid user-row">
+                        <img src="{% static 'assets/img/nepal-govt-logo.png' %}" class="img-responsive" alt="Conxole Admin">                       
+                    </div>
+            जीतपुरसिमरा उपमहानगरपालिका
+                  </span>
+                  
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                  <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                     <input class="input100" type="email" name="email" placeholder="Username">
+                     <span class="focus-input100"></span>
+                  </div>
+                  <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                     <input class="input100" type="password" name="password" placeholder="Password">
+                     <span class="focus-input100"></span>
+                  </div>
+                </br>
+                  <div class="container-login100-form-btn">
+                     <button class="login100-form-btn">
+                     Sign in
+                     </button>
+               
+                  </div>
+                  <br>
+                  <br>
+                  
+               </form>
+            </div>
+         </div>
+      </div>
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         
+         gtag('config', 'UA-23581568-13');
+      </script>
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"78f1477efdd89e82","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script>
+   </body>
+</html>

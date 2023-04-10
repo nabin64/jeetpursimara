@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h4 class="page-title">Coupon</h4>
+             
+          </div>
+      
+       </div>
+     </div>
+     {% include 'includes/messages.html' %}
+     <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                   <table id="table_id" class="table table-hover table-center mb-0">
+                      <thead>
+                         <tr>
+                            <th>कुपन न</th>
+                            <th>नाम</th>
+                            <th>पेट्रोल पम्प</th>
+                            <th>इन्धनको किसिम</th>
+                            <th>लिटर</th>
+                            <th>मिति</th>
+                            <th>कैफियत</th>
+                      
+                         </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in coupon %}
+                         <tr>
+                                  <td>{{i.id}}</td>                   
+                           <td><a href="{% url 'report_coupon' i.employee.id %}" > {{i.employee.name}}</a></td>
+                           
+                            <td><a href="{% url 'report_coupon_petrolpump' i.patrolpump.id %}" >{{i.patrolpump.name}}</a></td>
+                            <td>{{i.fueltype.name}}</td>
+                            <td>{{i.liter}}</td>
+                            <td>{{i.date|date:'Y-m-d'}}</td>
+                        
+                            <td> <div class="actions">
+                                {% if i.payment == 0 %}
+                                <a href = "{% url 'paid_coupon_now' i.id %}" class="btn btn-success">Unpaid</a>
+                
+                                {% else %}
+                                <button class="btn btn-danger" disabled="disabled">Paid</button>
+                                {% endif %}
+                               
+                            </div></td>
+                           
+                         
+                         </tr>
+                         {% endfor %}
+                         
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+{% endblock%}
