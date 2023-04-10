@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-!vdvduuio@9@h*s@u!7c1n9eu-=jx+9o8u+0b_4b))kan(i&rj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jitpursimara.palikafuelmanagement.com','www.jitpursimara.palikafuelmanagement.com']
+ALLOWED_HOSTS = ['103.94.159.147:8001']
 
 
 # Application definition
@@ -71,9 +71,9 @@ WSGI_APPLICATION = 'FuelManagementSystem.wsgi.application'
 DATABASES = {
   'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'palikafuel_jitpursimara',
-        'USER': 'palikafuel_hariharpurgaadhi',
-        'PASSWORD': 'gm?YQN;$7eyz',
+        'NAME': 'jitpursimara',
+        'USER': 'nabin',
+        'PASSWORD': 'Nabin@19890522',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
